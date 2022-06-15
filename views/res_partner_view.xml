@@ -12,9 +12,9 @@
                             <tree>
                                 <field name="name"/>
                                 <field name="date_order"/>
-                                <field name="commitment_date"/>
                                 <field name="amount_untaxed"/>
                                 <field name="amount_total"/>
+                                <field name="state"/>
                             </tree>
                         </field>
                         <field name="sum_investments"/>

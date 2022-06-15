@@ -10,13 +10,6 @@ class Partner(models.Model):
             record.sum_investments = 0.0
             for investment in record.investments:
                 record.sum_investments += investment.amount_untaxed
-                
-    @api.depends('sale.order')
-    def _so_list(self):
-        for record in self:
-            
-        
-                
-    
-    investments = fields.One2many('sale.order', 'investor', string='Investments', readonly=True, compute='_so_list')
-    sum_investments = fields.Float("Sum of Investments", compute='_investments_total')
+                   
+    investments = fields.One2many('sale.order', 'investor', string='Investments', readonly= True, domain=[('state', '=', 'sale')])
+    sum_investments = fields.Float('Sum of Investments', compute='_investments_total')
