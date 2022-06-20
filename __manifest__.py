@@ -8,8 +8,17 @@
     'website': 'https://myodoo.pl',
     'category': 'Templates',
     'version': '1.0',
-    'depends': ['sale'],
+    'depends': [
+        'base',
+        'account',
+        'sale', 
+        'contacts'
+    ],
     'data': [
+        'report/investor_report_template.xml',
+        'report/investor_report_caller.xml',
+        'data/generate_investor_raport.xml',
+        'security/ir.model.access.csv',
         'views/res_partner_view.xml',
         'views/sale_order_view.xml',
         'views/investor_report_view.xml'
