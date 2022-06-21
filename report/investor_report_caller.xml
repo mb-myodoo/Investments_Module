@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="raport_investor_report" model="ir.actions.report">
-            <field name="name">Investor Report</field>
-            <field name="model">investor.report</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_name">investments_module.report_investor_report_ext</field>
-            <field name="report_file">investments_module.report_investor_report_ext</field>
-            <field name="print_report_name">'Investor Report - %s' % (object.name)</field>
-            <field name="binding_model_id" ref="model_investor_report"/>
-            <field name="binding_type">report</field>
-        </record>
-    </data>
+    <record id="raport_investor_report" model="ir.actions.report">
+        <field name="name">Investor Report</field>
+        <field name="model">investor.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">investments_module.report_investor_report_ext</field>
+        <field name="report_file">investments_module.report_investor_report_ext</field>
+        <field name="print_report_name">'Investor Report - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_investor_report"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_investor_report_ext">
+        <t t-call="web.html_container"> 
+            <t t-foreach="docs" t-as="doc"> 
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <center>
+                            <h1>Investor Report</h1>
+                        </center>
+                        <div name="report_details">
+                            <span class="col-auto">
+                                <strong>Partner:</strong>
+                                <p t-field="doc.partner_id"/>
+                            </span>
+                            <span class="col-auto">
+                                <strong>Start Date:</strong>
+                                <p t-field="doc.start_date"/>
+                            </span>
+                            <span class="col-auto">
+                                <strong>End Date:</strong>
+                                <p t-field="doc.end_date"/>
+                            </span>
+                        </div>
+
+                        <table claas="table table-sm o_main_table" style="border-collapse: collapse; border: 1px solid #000000">
+                            <thead style="display: table-row-group">
+                                <tr class="text-center">
+                                    <th name="th_name" style="border: 1px solid #000000">Name</th>
+                                    <th name="th_start_date" style="border: 1px solid #000000">Date</th>
+                                    <th name="th_amount_untaxed" style="border: 1px solid #000000">Untaxed Amount</th>
+                                    <th name="th_amount_total" style="border: 1px solid #000000">Total Amount</th>
+                                    <th name="th_state" style="border: 1px solid #000000">State</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="sale-tbody">
+                                <t t-foreach="doc.values" t-as="values">
+                                    <tr class="text-left" style="outline: thin solid black">
+                                        <td style="border: 1px solid #000000" name="th_name">
+                                            <span t-field="values.name"/>
+                                        </td>
+                                        <td style="border: 1px solid #000000" name="th_start_date">
+                                            <span t-field="values.date_order"/>
+                                        </td>
+                                        <td style="border: 1px solid #000000" name="th_amount_untaxed" class="text-right">
+                                            <span t-field="values.amount_untaxed"/>
+                                        </td>
+                                        <td style="border: 1px solid #000000" name="th_amount_total" class="text-right">
+                                            <span t-field="values.amount_total"/>
+                                        </td>
+                                        <td style="border: 1px solid #000000" name="th_state" class="text-right">
+                                            <span t-field="values.state"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
 </odoo>

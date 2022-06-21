@@ -15,9 +15,7 @@
         'contacts'
     ],
     'data': [
-        'report/investor_report_template.xml',
         'report/investor_report_caller.xml',
-        'data/generate_investor_raport.xml',
         'security/ir.model.access.csv',
         'views/res_partner_view.xml',
         'views/sale_order_view.xml',
